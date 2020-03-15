@@ -150,7 +150,7 @@ EndpointsのURLの最後の/の後の値（今回の場合A）を入力。
 例：  
 https://xxxxx.cloudfront.net/out/v1/xxxxx/index.m3u8
 
-MacのSafariまたはiphone/Androidの標準ブラウザにてご確認ください。
+各ブラウザ（MacのSafari、WindowsのEdge、iPhoneのSafari、AndroidのChromeなど）にてご確認ください。
 
 # 4.Live配信終了手順
 
