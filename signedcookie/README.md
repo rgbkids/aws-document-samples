@@ -122,7 +122,7 @@ Lambdaのコンソールを開きます。
 
 const crypto = require('crypto');
 const algorithm = 'aes-192-cbc';
-const tokenSecret = 'balus-live-demo-tokensecret1234567890abcdef';
+const tokenSecret = 'live-demo-tokensecret1234567890abcdef';
 
 const encrypt = (text) => {
     let cipher = crypto.createCipher(algorithm, tokenSecret);
@@ -178,7 +178,7 @@ exports.handler = function (event, context) {
         AWS.config.region = 'ap-northeast-1';
         let lambda = new AWS.Lambda();
         let params = {
-            FunctionName: 'balus-live-demo-lambda-signed-cookies-generator',
+            FunctionName: 'sample-live-demo-lambda-signed-cookies-generator',
             Payload: JSON.stringify({userId: uid})
         };
 
