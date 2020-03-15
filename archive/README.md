@@ -107,6 +107,6 @@ Mode : 「VOD」を選択します（その他の設定はデフォルトのま�
 ![](screenshots/awsarc004.png)
 
 アーカイブ視聴用URLは、マニフェストファイル（.m3u8）を選択して表示されるオブジェクトURLになります。  
-（今回の場合は https://sample-live-s3.s3-ap-northeast-1.amazonaws.com/livetest/archive/live_stream.m3u8 ）
+（今回の場合は https://xxxxx.amazonaws.com/livetest/archive/live_stream.m3u8 ）
 
 ![](screenshots/awsarc007.png)
