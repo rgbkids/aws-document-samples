@@ -4,6 +4,10 @@
 
 - <a href='livestreaming/README.md'>livestreaming/README.md</a>
 
+## プレイヤー（Webブラウザ）
+
+- <a href='livestreaming/README.md'>livestreaming/README.md</a>
+
 ## アーカイブ
 
 - <a href='archive/README.md'>archive/README.md</a>
