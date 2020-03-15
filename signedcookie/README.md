@@ -14,7 +14,7 @@ Lambdaの種類
 ソース  
 `sample-live-demo-lambda-signed-cookies-generator/index.js`
 
-```JavaScript:index.js
+```
 'use strict';
 
 const crypto = require('crypto');
@@ -42,7 +42,59 @@ exports.handler = function (event, context) {
 署名が正しいか判定します。
 
 ソース  
-https://github.com/sample-co-ltd/sample-live-demo/tree/feature/chat-ban-fullscreen-cookie/backend/aws/lambda/sample-live-demo-lambda-signed-cookies-validator
+`sample-live-demo-lambda-signed-cookies-validator/index.js`
+
+```
+'use strict';
+
+const crypto = require('crypto');
+const algorithm = 'aes-192-cbc';
+const tokenSecret = 'balus-live-demo-tokensecret1234567890abcdef';
+
+const decrypt = (text) => {
+    let decipher = crypto.createDecipher(algorithm, tokenSecret);
+    let dec = decipher.update(text, 'base64', 'utf8');
+    dec += decipher.final('utf8');
+    return dec;
+};
+
+const parseCookies = (headers) => {
+    const parsedCookie = {};
+    if (headers.cookie) {
+        headers.cookie[0].value.split(';').forEach((cookie) => {
+            if (cookie) {
+                const parts = cookie.split('=');
+                parsedCookie[parts[0].trim()] = parts[1].trim();
+            }
+        });
+    }
+    return parsedCookie;
+};
+
+exports.handler = (event, context, callback) => {
+    try {
+        const request = event.Records[0].cf.request;
+        const headers = request.headers;
+
+        const parsedCookies = parseCookies(headers);
+        const userId = parsedCookies['CloudFront-User-Id'];
+        const sendSignature = parsedCookies['CloudFront-Signature'];
+
+        if (decrypt(sendSignature) !== userId) {
+            throw new Error("error");
+        }
+
+        callback(null, request);
+
+    } catch (error) {
+        let response = {
+            status: '401',
+            statusDescription: 'Unauthorized',
+        };
+        callback(null, response);
+    }
+};
+```
 
 まず、ジェネレータを登録します。
 Lambdaのコンソールを開きます。
@@ -62,8 +114,31 @@ Lambdaのコンソールを開きます。
 
 関数コードのindex.jsを、GitHubからのコードをコピーして置き換えます。
 
-ソース  
-https://github.com/sample-co-ltd/sample-live-demo/tree/feature/chat-ban-fullscreen-cookie/backend/aws/lambda/sample-live-demo-lambda-signed-cookies-generator
+ソース（上述、同じ内容）  
+`sample-live-demo-lambda-signed-cookies-generator/index.js`
+
+```
+'use strict';
+
+const crypto = require('crypto');
+const algorithm = 'aes-192-cbc';
+const tokenSecret = 'balus-live-demo-tokensecret1234567890abcdef';
+
+const encrypt = (text) => {
+    let cipher = crypto.createCipher(algorithm, tokenSecret);
+    let crypted = cipher.update(text, 'utf8', 'base64');
+    crypted += cipher.final('base64');
+    return crypted;
+};
+
+exports.handler = function (event, context) {
+    const signature = encrypt(event.userId);
+    const cookieCfSignature = `CloudFront-Signature=${signature}`;
+    const json = {signature: cookieCfSignature};
+
+    context.succeed(json);
+};
+```
 
 右上の「保存」をクリック。
 
@@ -72,7 +147,118 @@ https://github.com/sample-co-ltd/sample-live-demo/tree/feature/chat-ban-fullscre
 ジェネレータの呼び出し処理を書いたHTMLファイルは、御社の管理するWEBサーバーに置いてください。
 ジェネレータの呼び出し方は、こちらを参考にしてください。
 
-https://github.com/sample-co-ltd/sample-live-demo/blob/cb12b393610ff401ac5eb514c96b9a7aa16c6cb4/frontend/player/signed-cookies.html#L15
+ソース  
+`signed-cookies.html`
+
+```
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <title>Live streaming player(HLS) - Demo</title>
+</head>
+<body>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.36.min.js"></script>
+<script type="text/javascript">
+    let uid = "";
+    let accessKeyIdValue = "";
+    let secretAccessKeyValue = "";
+
+    function setSignedCookies() {
+        if (accessKeyIdValue === "" || secretAccessKeyValue === "") {
+            alert("未ログインまたはチケット未購入です！");
+            return;
+        }
+
+        AWS.config.update({
+            accessKeyId: accessKeyIdValue,
+            secretAccessKey: secretAccessKeyValue
+        });
+        AWS.config.region = 'ap-northeast-1';
+        let lambda = new AWS.Lambda();
+        let params = {
+            FunctionName: 'balus-live-demo-lambda-signed-cookies-generator',
+            Payload: JSON.stringify({userId: uid})
+        };
+
+        lambda.invoke(params, function (err, data) {
+            if (err) {
+                console.log(err, err.stack);
+                alert("失敗しました！");
+            } else {
+                JSON.parse(data.Payload, function (key, value) {
+                    if (key !== "") {
+                        document.cookie = value + ";path=/";
+                    }
+                });
+                document.cookie = "CloudFront-User-Id=" + uid + ";path=/";
+                alert("署名付きCookieを付与しました！");
+            }
+        });
+    }
+
+    alert("署名付きCookieを書き込みます。ボタンを押してください！");
+</script>
+<button onclick="setSignedCookies();">署名付きCookieを付与</button>
+<br>
+<br>
+<a href="javascript:history.back()">戻る</a>
+<br>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-functions.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "*****",
+        authDomain: "*****",
+        databaseURL: "*****",
+        projectId: "*****",
+        storageBucket: "*****",
+        messagingSenderId: "*****",
+        appId: "*****"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore();
+    db.settings({
+        timestampsInSnapshots: true
+    });
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            uid = user.uid;
+            initPage(user.uid);
+        }
+    });
+
+    function initPage(uid) {
+        db.collection('tickets').where('uid', '==', uid).get().then(doc => {
+            validateTicketState(doc.docs[0].id);
+        });
+    }
+
+    async function validateTicketState(documentId) {
+        const documentSnapshot = await db.collection('tickets').doc(documentId).get();
+        const record = documentSnapshot.data();
+
+        if (record.ticket == "bought") {
+            pullAccessKey();
+        }
+    }
+
+    async function pullAccessKey() {
+        const documentSnapshot = await db.collection('signed-cookies').doc('MXlieFg4itdUtW1PrnXJ').get();
+        const record = documentSnapshot.data();
+
+        accessKeyIdValue = record.accessKeyId;
+        secretAccessKeyValue = record.secretAccessKey;
+    }
+</script>
+</body>
+</html>
+```
 
 ライブ配信設定で使ったCloudFrontを介して、御社のWEBサイトが閲覧できるように設定します。
 
