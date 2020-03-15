@@ -116,7 +116,7 @@ Channels一覧からID項目のSampleChannel1リンクをクリック。
 
 EndpointsのURL項目にあるShow CloudFront URLの文字をクリックすると、  
 
-https://*****.cloudfront.net/out/v1/*****/index.m3u8  
+https://xxxxx.cloudfront.net/out/v1/xxxxx/index.m3u8  
 
 といったようなURLが表示されます。それが視聴用のURLとなります。
 
@@ -130,7 +130,7 @@ https://*****.cloudfront.net/out/v1/*****/index.m3u8
 
 URL：
 AWSマネジメントコンソールから、サービス->メディアサービス->MediaLiveを選択し、AWS Elemental
-MediaLive>InputsでName項目のSampleInputChannelリンクをクリックして表示される、EndpointsのURLの値の、最後の/の前まで（今回の場合、rtmp://***.***.***.***:****/SampleA）を入力。
+MediaLive>InputsでName項目のSampleInputChannelリンクをクリックして表示される、EndpointsのURLの値の、最後の/の前まで（今回の場合、rtmp://xxx.xxx.xxx.xxx:xxxx/SampleA）を入力。
 
 ストリームキー：
 EndpointsのURLの最後の/の後の値（今回の場合A）を入力。
@@ -148,7 +148,7 @@ EndpointsのURLの最後の/の後の値（今回の場合A）を入力。
 8.視聴用URLはこちらです（どこに表示されているかは、上述の説明をご参照ください）。
 
 例：  
-https://*****.cloudfront.net/out/v1/*****/index.m3u8
+https://xxxxx.cloudfront.net/out/v1/xxxxx/index.m3u8
 
 MacのSafariまたはiphone/Androidの標準ブラウザにてご確認ください。
 
