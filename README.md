@@ -6,7 +6,7 @@
 
 ## プレイヤー
 
-- <a href='livestreaming/README.md'>livestreaming/README.md</a>
+- <a href='player/README.md'>player/README.md</a>
 
 ## アーカイブ
 
