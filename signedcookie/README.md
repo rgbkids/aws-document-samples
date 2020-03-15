@@ -19,7 +19,7 @@ Lambdaの種類
 
 const crypto = require('crypto');
 const algorithm = 'aes-192-cbc';
-const tokenSecret = 'live-demo-tokensecret1234567890abcdef';
+const tokenSecret = '*****';
 
 const encrypt = (text) => {
     let cipher = crypto.createCipher(algorithm, tokenSecret);
