@@ -1,4 +1,4 @@
-# 視聴制限（簡易的なCookie認証）
+# 視聴制限（簡易的な署名付Cookie認証）
 
 ## システム構成図
 ![](screenshots/sample-signed-cookies_live_archive_20191007.png)
