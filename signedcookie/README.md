@@ -1,4 +1,6 @@
-システム構成図
+# 視聴制限（簡易的なCookie認証）
+
+## システム構成図
 ![](screenshots/sample-signed-cookies_live_archive_20191007.png)
 
 ----
