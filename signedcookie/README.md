@@ -14,7 +14,7 @@ Lambdaの種類
 ソース  
 `sample-live-demo-lambda-signed-cookies-generator/index.js`
 
-```
+```html:index.js
 'use strict';
 
 const crypto = require('crypto');
@@ -44,7 +44,7 @@ exports.handler = function (event, context) {
 ソース  
 `sample-live-demo-lambda-signed-cookies-validator/index.js`
 
-```
+```html:index.js
 'use strict';
 
 const crypto = require('crypto');
@@ -117,7 +117,7 @@ Lambdaのコンソールを開きます。
 ソース（上述、同じ内容）  
 `sample-live-demo-lambda-signed-cookies-generator/index.js`
 
-```
+```html:index.js
 'use strict';
 
 const crypto = require('crypto');
@@ -150,7 +150,7 @@ exports.handler = function (event, context) {
 ソース  
 `signed-cookies.html`
 
-```
+```html:signed-cookies.html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
