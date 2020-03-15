@@ -39,7 +39,7 @@ URL：
 
 s3ssl://[バケット名]/[パス/][プレフィックス]
 
-例：s3ssl://sample-live-s3/livetest/archive/live_stream
+例：s3ssl://xxxxx/livetest/archive/live_stream
   
 パス ： アーカイブファイルを保存するディレクトリのパス（上の例では「livetest/archive/」）  
 プレフィックス ： アーカイブファイルの先頭につける共通名（上の例では「live_stream」）  
@@ -50,7 +50,7 @@ s3ssl://[バケット名]/[パス/][プレフィックス]
 
 バックアップのURLを指定します。
 
-例：s3ssl://sample-live-s3/livetest/archive-backup/live_stream
+例：s3ssl://xxxxx/livetest/archive-backup/live_stream
 
 - HLS settings
 
