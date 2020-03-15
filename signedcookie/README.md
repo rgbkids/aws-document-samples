@@ -12,7 +12,30 @@ Lambdaの種類
 ユーザID毎に簡易的な署名を生成します。
 
 ソース  
-https://github.com/sample-co-ltd/sample-live-demo/tree/feature/chat-ban-fullscreen-cookie/backend/aws/lambda/sample-live-demo-lambda-signed-cookies-generator
+`sample-live-demo-lambda-signed-cookies-generator/index.js`
+
+```JavaScript:index.js
+'use strict';
+
+const crypto = require('crypto');
+const algorithm = 'aes-192-cbc';
+const tokenSecret = 'balus-live-demo-tokensecret1234567890abcdef';
+
+const encrypt = (text) => {
+    let cipher = crypto.createCipher(algorithm, tokenSecret);
+    let crypted = cipher.update(text, 'utf8', 'base64');
+    crypted += cipher.final('base64');
+    return crypted;
+};
+
+exports.handler = function (event, context) {
+    const signature = encrypt(event.userId);
+    const cookieCfSignature = `CloudFront-Signature=${signature}`;
+    const json = {signature: cookieCfSignature};
+
+    context.succeed(json);
+};
+```
 
 2、バリデータ
 
