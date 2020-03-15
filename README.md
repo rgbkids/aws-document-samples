@@ -4,7 +4,7 @@
 
 - <a href='livestreaming/README.md'>livestreaming/README.md</a>
 
-## プレイヤー（Webブラウザ）
+## プレイヤー
 
 - <a href='livestreaming/README.md'>livestreaming/README.md</a>
 
