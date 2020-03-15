@@ -12,7 +12,7 @@
 
 - <a href='archive/README.md'>archive/README.md</a>
 
-## 簡易的な署名付Cookie
+## 視聴制限（簡易的な署名付Cookie）
 
 - <a href='signedcookie/README.md'>signedcookie/README.md</a>
 
