@@ -13,7 +13,6 @@
     <title>Live streaming player(HLS) - Demo</title>
 </head>
 <body>
-<h1>PC/Android</h1>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <video id="video" crossorigin controls></video>
