@@ -30,6 +30,9 @@ AWS(EC2等）自社サーバでも運営可能
 
 # チャット
 ## 独自
+メリット
+プレイリスト長さを2時間にできる。これでvideo.currentTime取れる
+
 ## Firebase
 https://github.com/rgbkids/balus-live-demo/tree/feature/chat_vteacher_added/firebase
 
