@@ -1,39 +1,50 @@
 # 目次
 
-## ライブストリーミング
+## ライブストリーミング環境を作る
 
-## nginx-rtmp-module (要ライセンス表記)
+### nginx-rtmp-moduleを利用する (要ライセンス表記)
+
 AWS(EC2等）自社サーバでも運営可能
 例のシステム構成図
 アーカイブは独自（rsyncなど）
 
-## AWSでフルマネージド
+### AWSでフルマネージドで用意する
 - <a href='livestreaming/README.md'>livestreaming/README.md</a>
 
-## プレイヤー
+## プレイヤーを開発する
 
-## HLS対応ブラウザ
+### HLS対応ブラウザ
 
-## HLS非対応ブラウザ（hls.js　要ライセンス表記）
+### HLS非対応ブラウザ（hls.js　要ライセンス表記）
 - <a href='player/README.md'>player/README.md</a>
 
-## アーカイブ
+## アーカイブを設定する
 
+### nginx-rtmp-moduleの場合 (要ライセンス表記)
+
+rsyncなどで行う。
+
+### AWSフルマネージドの場合（S3に保存する）
+ 
 - <a href='archive/README.md'>archive/README.md</a>
 
 ## 視聴制限
+
+AWS CloudFrontを利用した簡易的な視聴者制限
+
 ### WAF
 - https://github.com/rgbkids/balus-live-demo/tree/feature/manual/documents_other/waf
 
 ### 署名付きCookie
 - <a href='signedcookie/README.md'>signedcookie/README.md</a>
 
-# チャット
-## 独自
+## チャットを作成する
+
+## 独自でシグナリングサーバーを用意する
 メリット
 プレイリスト長さを2時間にできる。これでvideo.currentTime取れる
 
-## Firebase
+## Firebaseを使う
 https://github.com/rgbkids/balus-live-demo/tree/feature/chat_vteacher_added/firebase
 
 # 認証
