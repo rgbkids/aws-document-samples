@@ -31,6 +31,7 @@ AWS(EC2等）自社サーバでも運営可能
 # チャット
 ## 独自
 ## Firebase
+https://github.com/rgbkids/balus-live-demo/tree/feature/chat_vteacher_added/firebase
 
 # 認証
 ## 独自
