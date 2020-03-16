@@ -1,0 +1,15 @@
+{
+    "protocol": "ftp",
+    "host": "users450.lolipop.jp",
+    "user": "schoolbus.jp-vteacher",
+    "pass": "",
+    "remote": "/v",
+    "agent": "",
+    "privatekey": "",
+    "passphrase": "",
+    "hosthash": "",
+    "ignorehost": true,
+    "connTimeout": 10000,
+    "keepalive": 10000,
+    "keyboardInteractive": false
+}
