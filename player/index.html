@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <title>Live streaming player(HLS) - Demo</title>
+</head>
+<body>
+<h3>デモ</h3>
+
+<p id="my-info"></p>
+<button id="my-login">ログイン(Google)</button>
+<button id="my-logout">ログアウト</button>
+<button id="my-buy">チケットを買う</button>
+<button id="my-cancel">チケットキャンセル</button>
+
+<p>※ログイン後、署名付きCookieを付与してください！</p>
+<a href="signed-cookies.html">署名付きCookieを付与する</a>
+<hr>
+<br>
+<p>(a) <a href="player-demo.html">[HTML5通常版(CreateJS未使用/hls.js未使用版)]</a></p>
+Windows:Edge/Mac:Safari/Android:Chrome/iOS:Safari<br>
+<br>
+<p>(b) <a href="player-ios-demo.html">[CreateJS版]</a></p>
+iOS:Safari(iOSフルスクリーン最適化)<br>
+<br>
+<p>(c) <a href="player-hlsjs-demo.html">[hls.js版]</a>※デザイン未適用</p>
+Windows:Edge,Chrome/Mac:Safari,Chrome/Android:Chrome/※iOS:非対応<br>
+<br>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-functions.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyD_JpcbuEWVaKtNfTaDJnSxys_VSMXxLB4",
+        authDomain: "balus-live-demo.firebaseapp.com",
+        databaseURL: "https://balus-live-demo.firebaseio.com",
+        projectId: "balus-live-demo",
+        storageBucket: "",
+        messagingSenderId: "143300566927",
+        appId: "1:143300566927:web:74f552127cf61342"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore();
+    db.settings({
+        timestampsInSnapshots: true
+    });
+    const collection = db.collection('tickets');
+
+    const auth = firebase.auth();
+    let me = null;
+    let bought = false;
+
+    const info = document.getElementById('my-info');
+    const login = document.getElementById('my-login');
+    const logout = document.getElementById('my-logout');
+    const buy = document.getElementById('my-buy');
+    const cancel = document.getElementById('my-cancel');
+
+    login.addEventListener('click', () => {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider);
+    });
+
+    logout.addEventListener('click', () => {
+        auth.signOut();
+        localStorage.setItem('passcode', '');
+        info.innerHTML = "ログインしてください！";
+    });
+
+    buy.addEventListener('click', () => {
+        if (bought) {
+            alert('購入済です！');
+            return;
+        }
+
+        collection.add({
+            ticket: 'bought',
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+            uid: me ? me.uid : ''
+        })
+        .then(doc => {
+            alert('チケットを購入しました！');
+            bought = true;
+        })
+        .catch(error => {
+            info.innerHTML = "ログインしてください！";
+        });
+    });
+
+    cancel.addEventListener('click', () => {
+        if (!bought) {
+            alert('未購入です！');
+            return;
+        }
+
+        collection.where('uid', '==', me.uid).get().then(doc => {
+            collection.doc(doc.docs[0].id).delete(
+            )
+            .then(doc => {
+                alert('チケットをキャンセルしました！');
+                info.innerHTML = "ログインしています。";
+                localStorage.setItem('passcode', '');
+                bought = false;
+
+                document.cookie = "CloudFront-Key-Pair-Id=;path=/";
+                document.cookie = "CloudFront-Policy=;path=/";
+                document.cookie = "CloudFront-Signature=;path=/";
+                document.cookie = "CloudFront-User-Id=;path=/";
+            })
+            .catch(error => {
+                info.innerHTML = "ログインしてください！";
+            });
+        });
+    });
+
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            me = user;
+            info.innerHTML = "ログインしています。";
+
+            collection.orderBy('created').onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === 'added') {
+                        const d = change.doc.data();
+                        if (me.uid == d.uid && d.ticket == "bought") {
+                            info.innerHTML = "ログインしています。チケット購入済";
+                            bought = true;
+                        }
+                    }
+                });
+            }, error => {
+            });
+            return;
+        }
+        me = null;
+    });
+</script>
+</body>
+</html>
