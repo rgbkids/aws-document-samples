@@ -1263,9 +1263,15 @@
 <div id="navigation">
     <p>My Live-streaming!</p>
 </div>
-<video onclick="controlPlaying()" id="video" playsinline>
+
+
+<!-- <video onclick="controlPlaying()" id="video" playsinline>
     <source id="video-source" src='https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8'>
+</video> -->
+<video onclick="controlPlaying()" id="video" playsinline>
+    <source id="video-source" src=''>
 </video>
+
 <div id="controller-seek">
     <p id="controller-time">0:00 / 0:00</p>
 </div>
@@ -1341,12 +1347,28 @@
         let duration = millisToMinutesAndSeconds(parseInt(v.duration) * 1000);
         document.getElementById("controller-time").innerHTML = currentTime + " / " + duration;
     });
-    // v.width = window.parent.screen.width;
-    // v.height = window.parent.screen.height;
 
     if (isIOS) {
         document.getElementById("controller-landscape-fullscreen-fullscreen").style.display = 'none';
     }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    let videoSourceURL = 'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8';
+    if (Hls.isSupported()) {
+        var video = document.getElementById('video');
+        var hls = new Hls();
+        hls.loadSource(videoSourceURL);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    } else {
+        var videoSource = document.getElementById('video-source');
+        videoSource.src = videoSourceURL;
+    }
+</script>
+
 </body>
 </html>
