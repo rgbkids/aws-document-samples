@@ -80,9 +80,15 @@
             #navigation {
                 background-color: rgba(0, 0, 0, 1.0);
                 color: white;
-                padding-top: 10px;
+                /* padding-top: 10px;
                 padding-bottom: 10px;
-                padding-left: 10px;
+                padding-left: 10px; */
+
+                padding-top: 2px;
+                padding-bottom: 2px;
+                padding-left: 2px;
+
+                height: 3%;
             }
 
             #video {
@@ -103,13 +109,13 @@
                 padding-left: 20px;
             } */
 
-            #video-count {
+            /* #video-count {
                 font-size: x-small;
                 color: white;
                 background-color: rgba(255, 0, 128, 0.7);
                 width: 100px;
                 text-align: center;
-            }
+            } */
 
             /* #chat-label {
                 background-color: powderblue;
@@ -137,7 +143,7 @@
 
             #controller-play {
                 position: absolute;
-                top: 4%;
+                /* top: 4%; */
                 left: 0;
                 width: 100%;
 
@@ -155,7 +161,8 @@
             #controller-volume {
                 position: absolute;
                 top: 5%;
-                left: 10%;
+                /* left: 10%; */
+                left: 40px;
 
                 background-color: rgba(0, 0, 0, 0.7);
             }
@@ -183,7 +190,8 @@
                 background-color: black;
                 padding: 0;
                 margin: 0;
-                height: 24px;
+                /* height: 24px; */
+                height: 3%;
             }
 
             #controller-replay {
@@ -290,6 +298,18 @@
             }
         }
 
+        @media screen and (max-width: 1024px) and (orientation: portrait) {
+            #controller-play {
+                top: 14%;
+            }
+        }
+
+        @media screen and (max-width: 767px) and (orientation: portrait) {
+            #controller-play {
+                top: 4%;
+            }
+        }
+
         @media screen and (orientation: landscape) {
             body {
                 background-color: rgba(0, 0, 0, 1.0);
@@ -311,9 +331,9 @@
                 display: none;
             } */
 
-            #video-count {
+            /* #video-count {
                 display: none;
-            }
+            } */
 
             /* #chat-label {
                 display: none;
@@ -403,8 +423,8 @@
                 position: fixed;
                 /* top: 10%; */
                 /* bottom: 10%; */
-                /* top: 90%; */
-                top: 90%;
+                /* top: 95%; */
+                top: 95%;
                 /* left: 90%; */
                 left: 50%;
                 z-index: 10001;
@@ -421,7 +441,7 @@
                 display: block;
                 position: fixed;
                 /* top: 10%; */
-                top: 90%;
+                top: 95%;
                 /* left: 52%; */
                 left: 45%;
 
@@ -442,7 +462,7 @@
                 /* top: 10%; */
                 /* left: 5%; */
 
-                top: 90%;
+                top: 95%;
                 left: 55%;
 
                 z-index: 10002;
@@ -580,35 +600,26 @@
             #controller-time {
                 padding-left: 26px;
                 padding-right: 26px;
-                top: 90%;
+                top: 95%;
             }
 
             #chat-form {
-                /* top: 90%;
-
-                 */
-
-                 display: inline;
-                 float: left;
-                 vertical-align: bottom;
-                 background-color: rgba(0, 0, 0, 0.0);
-
-                 /* text-align: center; */
-
-                 position: absolute;
-                 top: 90%;
-                 left: 5%;
-                 width: 40%;
-                 z-index: 999999;
+                position: fixed;
+                top: 95%;
+                left: 5%;
+                width: 40%;
+                z-index: 2000000;
             }
 
             #controller-landscape-fullscreen-replay {
-                top: 90%;
+                top: 95%;
+                /* left: 60%; */
                 left: 60%;
             }
 
             #controller-landscape-fullscreen-forward {
-                top: 90%;
+                top: 95%;
+                /* left: 65%; */
                 left: 65%;
             }
 
@@ -665,7 +676,7 @@
 
         @media screen and (max-width: 1023px) and (orientation: landscape) {
             #chat-form {
-                /* top: 90%; */
+                /* top: 95%; */
                 top: 95%;
                 left: 5%;
             }
@@ -673,18 +684,18 @@
             #controller-time {
                 padding-left: 6px;
                 padding-right: 6px;
-                top: 90%;
+                top: 95%;
                 /* left: 79%; */
             }
 
             #controller-landscape-fullscreen-replay {
-                top: 90%;
+                top: 95%;
                 /* left: 60%; */
                 left: 60%;
             }
 
             #controller-landscape-fullscreen-forward {
-                top: 90%;
+                top: 95%;
                 /* left: 65%; */
                 left: 65%;
             }
@@ -711,7 +722,7 @@
             #controller-time {
                 padding-left: 6px;
                 padding-right: 6px;
-                top: 90%;
+                top: 95%;
                 left: 79%;
             }
 
@@ -751,20 +762,20 @@
             #controller-time {
                 padding-left: 6px;
                 padding-right: 6px;
-                top: 90%;
+                top: 95%;
                 left: 79%;
             }
 
             #controller-landscape-fullscreen-replay {
                 /* top: 80%; */
-                top: 90%;
+                top: 95%;
                 /* left: 79%; */
                 left: 55%;
             }
 
             #controller-landscape-fullscreen-forward {
                 /* top: 80%; */
-                top: 90%;
+                top: 95%;
                 /* left: 90%; */
                 left: 60%;
             }
@@ -1248,13 +1259,13 @@
 <body id="main">
 <!-- <canvas id="canvas-createjs"></canvas> -->
 <div id="navigation">
-    <p></p>
+    <p>My Live-streaming!</p>
 </div>
 <video onclick="controlPlaying()" id="video" playsinline>
-    <source id="video-source" src='/hls/archive/8b61cca8ac8662a9e851c5e251505470_a.m3u8'>
+    <source id="video-source" src='https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8'>
 </video>
 <div id="controller-seek">
-    <p id="controller-time">0:00/0:00</p>
+    <p id="controller-time">0:00 / 0:00</p>
 </div>
 <div id="controller-seek-area">
     <p id="controller-replay" onclick="controlReplay()" style="">
@@ -1267,12 +1278,12 @@
     </p>
 </div>
 <!-- <div id="video-title">
-    <p>【LIVE】ああああああ</p>
+    <p></p>
 </div> -->
 <!-- <div id="video-user">
     <p>配信ユーザー００１</p>
 </div> -->
-<div id="video-count"></div>
+<!-- <div id="video-count"></div> -->
 <!-- <div id="chat-label">
     <p>コメント</p>
 </div> -->
@@ -1326,7 +1337,7 @@
     v.addEventListener('timeupdate', function () {
         let currentTime = millisToMinutesAndSeconds(parseInt(v.currentTime) * 1000);
         let duration = millisToMinutesAndSeconds(parseInt(v.duration) * 1000);
-        document.getElementById("controller-time").innerHTML = currentTime + "/" + duration;
+        document.getElementById("controller-time").innerHTML = currentTime + " / " + duration;
     });
     // v.width = window.parent.screen.width;
     // v.height = window.parent.screen.height;
