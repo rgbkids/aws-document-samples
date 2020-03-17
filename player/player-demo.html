@@ -573,6 +573,10 @@
         }
 
         @media screen and (max-width: 3600px) and (orientation: landscape) {
+            body {
+              overflow: hidden;
+            }
+
             #controller-time {
                 padding-left: 26px;
                 padding-right: 26px;
@@ -580,7 +584,22 @@
             }
 
             #chat-form {
-                top: 90%;
+                /* top: 90%;
+
+                 */
+
+                 display: inline;
+                 float: left;
+                 vertical-align: bottom;
+                 background-color: rgba(0, 0, 0, 0.0);
+
+                 /* text-align: center; */
+
+                 position: absolute;
+                 top: 90%;
+                 left: 5%;
+                 width: 40%;
+                 z-index: 999999;
             }
 
             #controller-landscape-fullscreen-replay {
@@ -609,10 +628,13 @@
         }
 
         @media screen and (max-width: 1280px) and (orientation: landscape) {
-            #controller-time {
+            /* #controller-time {
                 padding-left: 26px;
                 padding-right: 26px;
                 top: 70%;
+
+                                                color:blue;
+
             }
 
             #chat-form {
@@ -638,13 +660,13 @@
                 z-index: 1;
 
                 overflow-y: scroll;
-            }
+            } */
         }
 
         @media screen and (max-width: 1023px) and (orientation: landscape) {
             #chat-form {
                 /* top: 90%; */
-                top: 90%;
+                top: 95%;
                 left: 5%;
             }
 
@@ -658,13 +680,13 @@
             #controller-landscape-fullscreen-replay {
                 top: 90%;
                 /* left: 60%; */
-                left: 55%;
+                left: 60%;
             }
 
             #controller-landscape-fullscreen-forward {
                 top: 90%;
                 /* left: 65%; */
-                left: 60%;
+                left: 65%;
             }
 
             #chat-comments {
@@ -1306,6 +1328,8 @@
         let duration = millisToMinutesAndSeconds(parseInt(v.duration) * 1000);
         document.getElementById("controller-time").innerHTML = currentTime + "/" + duration;
     });
+    // v.width = window.parent.screen.width;
+    // v.height = window.parent.screen.height;
 
     if (isIOS) {
         document.getElementById("controller-landscape-fullscreen-fullscreen").style.display = 'none';
