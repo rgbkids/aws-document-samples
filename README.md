@@ -15,7 +15,6 @@ AWS(EC2等）自社サーバでも運営可能
 
 ### HLS対応ブラウザ
 
-### HLS非対応ブラウザ（hls.js　要ライセンス表記）
 - <a href='player/README.md'>player/README.md</a>
 
 ## アーカイブを設定する
