@@ -32,6 +32,10 @@
             background: transparent;
         }
 
+        body {
+            font-family: monospace;
+        }
+
         .chat-comment {
         }
 
@@ -255,8 +259,10 @@
 
             #chat-comments {
                 /* height: 25%; */
-                height: 60%;
+                height: 100%;
                 padding-left: 20px;
+
+                /* padding-bottom: 80px; */
 
                 /* overflow: scroll; */
                 overflow-y: scroll;
@@ -301,6 +307,7 @@
 
             #blank-bottom {
                 padding-bottom: 0;
+                /* padding-bottom: 80px; */
             }
         }
 
@@ -327,6 +334,7 @@
 
             #video {
                 background-color: rgba(0, 0, 0, 1.0);
+                width: 100%;
             }
 
             /* #video-title {
@@ -594,7 +602,8 @@
             }
 
             #blank-bottom {
-                padding-bottom: 5px;
+                /* padding-bottom: 5px; */
+                padding-bottom: 0;
             }
         }
 
@@ -760,7 +769,8 @@
 
         @media screen and (max-width: 580px) and (orientation: landscape) {
             #chat-form {
-                top: 77%;
+                /* top: 77%; */
+                top: 90%;
                 left: 5%;
                 width: 50%
             }
@@ -1116,9 +1126,11 @@
             if (playing) {
                 pause();
                 document.getElementById("controller-play").style.visibility = 'visible';
+                document.getElementById("fullscreen-message-landscape-landscape").style.display = 'inline';
             } else {
                 play();
                 document.getElementById("controller-play").style.visibility = 'hidden';
+                document.getElementById("fullscreen-message-landscape-landscape").style.display = 'none';
             }
             playing = !playing;
         }
@@ -1344,6 +1356,8 @@
 
 
 <p id="blank-bottom"></p>
+
+
 <script>
     let v = document.getElementById("video");
     v.addEventListener('timeupdate', function () {
@@ -1371,6 +1385,12 @@
     } else {
         var videoSource = document.getElementById('video-source');
         videoSource.src = videoSourceURL;
+    }
+
+    if (isOrientationPortrait()) {
+        chatComments.scrollTop = chatComments.scrollHeight;
+    } else {
+        scrollTo(0, 0);
     }
 </script>
 
