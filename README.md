@@ -17,11 +17,15 @@ AWS(EC2等）自社サーバでも運営可能
 
 - <a href='player/README.md'>player/README.md</a>
 
+### HLS未対応対応ブラウザ
+
+- <a href='player/README.md'>player/README.md</a>
+
 ## アーカイブを設定する
 
 ### nginx-rtmp-moduleの場合 (要ライセンス表記)
 
-rsyncなどで行う。
+(rsyncなどで行う)
 
 ### AWSフルマネージドの場合（S3に保存する）
  
