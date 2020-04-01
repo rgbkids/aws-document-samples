@@ -36,7 +36,6 @@ AWS(EC2等）自社サーバでも運営可能
 AWS CloudFrontを利用した簡易的な視聴者制限
 
 ### WAF
-- https://github.com/rgbkids/balus-live-demo/tree/feature/manual/documents_other/waf
 
 ### 署名付きCookie
 - <a href='signedcookie/README.md'>signedcookie/README.md</a>
