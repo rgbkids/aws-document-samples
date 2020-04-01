@@ -47,7 +47,6 @@ AWS CloudFrontを利用した簡易的な視聴者制限
 プレイリスト長さを2時間にできる。これでvideo.currentTime取れる
 
 ## Firebaseを使う
-https://github.com/rgbkids/balus-live-demo/tree/feature/chat_vteacher_added/firebase
 
 # 認証
 ## 独自
